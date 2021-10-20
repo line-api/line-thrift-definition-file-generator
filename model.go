@@ -26,19 +26,19 @@ func (t *TService) TString() string {
 
 type TMethod struct {
 	//map[fieldIndex]Field
-	RequestField map[int]*TField
-	Response     ThriftType
+	Parameters map[int]*TField
+	Response   ThriftType
 
 	Name      string
 	Exception *TException
 }
 
 func (t *TMethod) formatRequestFields() string {
-	if len(t.RequestField) == 0 {
+	if len(t.Parameters) == 0 {
 		return ""
 	}
 	str := "\n"
-	for idx, f := range t.RequestField {
+	for idx, f := range t.Parameters {
 		str += fmt.Sprintf("%v%v%v: %v %v,\n", thriftIndent, thriftIndent, idx, f.Type.TName(), f.Name)
 	}
 	return str + thriftIndent

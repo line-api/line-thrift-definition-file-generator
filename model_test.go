@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"go/ast"
 	"testing"
 )
 
@@ -9,7 +10,7 @@ func TestTService_TString(t *testing.T) {
 	service := &TService{
 		Methods: map[string]*TMethod{
 			"sendMessage": {
-				RequestField: map[int]*TField{
+				Parameters: map[int]*TField{
 					1: {
 						Name: "reqSeq",
 						Type: &TString{},
@@ -68,5 +69,6 @@ func TestTService_TString(t *testing.T) {
 		},
 		Name: "TalkService",
 	}
+	ast.Print(nil, service)
 	fmt.Println(service.TString())
 }
