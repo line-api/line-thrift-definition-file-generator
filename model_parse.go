@@ -74,7 +74,7 @@ func updateEnumAndStructs(basee map[string]*TEnum, bases map[string]*TStruct, ba
 	}
 }
 
-func formatThriftService(service *TService) string {
+func FormatThriftService(service *TService) string {
 	enums, structs, exceptions := parseModelToNonDuplicatedContents(service)
 	var txt string
 	for _, enum := range enums {

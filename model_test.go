@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestTService_TString(t *testing.T) {
+func TestFormatThriftService(t *testing.T) {
 	message := &TStruct{
 		Name: "Message",
 		Fields: map[int]*TField{
@@ -81,5 +81,5 @@ func TestTService_TString(t *testing.T) {
 		},
 		Name: "TalkService",
 	}
-	fmt.Println(formatThriftService(service))
+	fmt.Println(FormatThriftService(service))
 }
