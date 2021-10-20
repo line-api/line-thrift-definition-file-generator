@@ -2,11 +2,31 @@ package main
 
 import (
 	"fmt"
-	"go/ast"
 	"testing"
 )
 
 func TestTService_TString(t *testing.T) {
+	message := &TStruct{
+		Name: "Message",
+		Fields: map[int]*TField{
+			1: {
+				Name: "from",
+				Type: &TString{},
+			},
+			2: {
+				Name: "location",
+				Type: &TStruct{
+					Name: "Location",
+					Fields: map[int]*TField{
+						1: {
+							Name: "address",
+							Type: &TString{},
+						},
+					},
+				},
+			},
+		},
+	}
 	service := &TService{
 		Methods: map[string]*TMethod{
 			"sendMessage": {
@@ -17,18 +37,10 @@ func TestTService_TString(t *testing.T) {
 					},
 					2: {
 						Name: "message",
-						Type: &TStruct{
-							Name: "Message",
-							Fields: map[int]*TField{
-								1: {
-									Name: "from",
-									Type: &TString{},
-								},
-							},
-						},
+						Type: message,
 					},
 				},
-				Response: &TString{},
+				Response: message,
 				Name:     "sendMessage",
 				Exception: &TException{
 					TStruct: &TStruct{
@@ -69,6 +81,5 @@ func TestTService_TString(t *testing.T) {
 		},
 		Name: "TalkService",
 	}
-	ast.Print(nil, service)
-	fmt.Println(service.TString())
+	fmt.Println(formatThriftService(service))
 }
